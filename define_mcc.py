@@ -2,14 +2,14 @@ import sys,csv
 
 # Merchant category codes (MCCs) are four digit codes used by credit card companies
 # They are used to classify and define different types of business
-# This program can be used to quickly get information about any particular cc
+# This script can be used to quickly get information about any particular cc
  
 # USAGE: python define_mcc.py 4821
 # TO BE USED with mcc_codes.csv in the same directory
 
 def make_dictionary(file):
     """
-    First, use csv.reader to parse mcc csv file.
+    Use csv.reader to parse mcc csv file.
     We're interested in the mcc code, description, and category (if it exists).
     Let's make a dictionary of these.
     """
@@ -30,6 +30,10 @@ def make_dictionary(file):
     return mcc_dict
 
 def search_and_print_dictionary(d, number):
+    """
+    Search dictionary for mcc number.
+    Print mcc information.
+    """
     code = int(number)
     if code in d.keys():
         description=d[code]['description']
