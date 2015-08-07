@@ -32,6 +32,9 @@ class Engine(object):
 		pass
 
 	def start(self):
+		"""
+		Prompt for Player creation.
+		"""
 		print "What will be your player's name?"
 		name = raw_input("> ")
 		print "What will be your player's position?"
@@ -52,8 +55,8 @@ class Engine(object):
 		print "So:"
 		time.sleep(1)
 		print player
-
+		return player
 
 if __name__ == "__main__":
 	engine = Engine()
-	engine.start()
+	player = engine.start()
