@@ -2,7 +2,7 @@
 
 import time, random
 
-POS = {
+POS = { # Abbreviations much more practical. Use dict to print player info and check correct input when creating player.
 	'PG':'Point Guard',
 	'SG':'Shooting Guard',
 	'SF':'Small Forward',
@@ -11,6 +11,9 @@ POS = {
 	}
 
 class Player(object):
+	"""
+	Our NBA Player.
+	"""
 
 	def __init__(self, name, position, college):
 		self.name = name
@@ -20,7 +23,10 @@ class Player(object):
 	def __repr__(self):
 		return "Your name is %s and you're a %s from %s." % (self.name, POS[self.position], self.college)
 
-class Game(object):
+class Engine(object):
+	"""
+	How our game will work.
+	"""
 
 	def __init__(self):
 		pass
@@ -32,9 +38,12 @@ class Game(object):
 		for p, v in POS.iteritems():
 			print "Enter %s for %s " % (p, v)
 		position = raw_input("> ").upper()
-		while position not in POS.keys(): #Should this be a while True loop?
-			print "Type one of the above."
-			position = raw_input("> ").upper()
+		while True:
+			if position in POS.keys():
+				break
+			else:
+				print "Enter one of the above position abbreviations."
+				position = raw_input("> ").upper()
 		print "Where did your player go to college?"
 		college = raw_input("> ")
 		player = Player(name, position, college)
@@ -46,5 +55,5 @@ class Game(object):
 
 
 if __name__ == "__main__":
-	game = Game()
-	game.start()
+	engine = Engine()
+	engine.start()
