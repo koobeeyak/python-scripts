@@ -1,4 +1,4 @@
 python-scripts
 ==============
 
-Keep some of those various python scripts in here
+Instead of starting a new repo for every small Python project, keep them here.
