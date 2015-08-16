@@ -14,10 +14,14 @@ def scrape_nba_teams():
 
 def prompt_user_for_team():
 	soup = scrape_nba_teams()
+	
 	for team_link in soup.find_all('a', href = re.compile(BASE_URL + "team/_/name/*")):
 		print team_link
 		print team_link['href']
 		print team_link.text
+		find_abbrev = re.match(r"^.*\/name\/(.*)\/.*$",team_link['href'])
+		team_abbrev = find_abbrev.group(1)
+		print team_abbrev
 
 if __name__ == "__main__":
 	prompt_user_for_team()
