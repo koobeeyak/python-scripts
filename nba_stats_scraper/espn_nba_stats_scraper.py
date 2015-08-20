@@ -20,7 +20,7 @@ def generate_team_abbrev_team_name_dict():
 def prompt_user_for_team():
 	d = generate_team_abbrev_team_name_dict()
 	print "\nWhich team would you like to see?\n"
-	time.sleep(2)
+	time.sleep(1)
 	for p,v in d.iteritems():
 		print "Enter \'%s\' for %s." % (p,v) 
 	chosen_team = raw_input("> ").lower()
@@ -32,5 +32,18 @@ def prompt_user_for_team():
 			chosen_team = raw_input("> ").lower()
 	return BASE_URL + "teams/stats?team=" + chosen_team # link to team's page, e.g. http://espn.go.com/nba/teams/stats?team=sa
 
+def scrape_team(chosen_team):           # TODO: -is this scraping postseason or regular season performance?
+	response = requests.get(chosen_team)#       -add team name, player id to the list of stats
+	soup = BeautifulSoup(response.text, "html.parser")
+	players = []
+	for player in soup.find_all(class_ = re.compile("player-[0-9]")): # avoid 'player-info' class--that's for top performers (redundant)
+		individual_player = []
+		for stat in player:
+			individual_player.append(stat.text)
+		players.append(individual_player)
+	return players
+
 if __name__ == "__main__":
-	print prompt_user_for_team()
+	chosen_team = prompt_user_for_team()
+	players = scrape_team(chosen_team)
+	print players
